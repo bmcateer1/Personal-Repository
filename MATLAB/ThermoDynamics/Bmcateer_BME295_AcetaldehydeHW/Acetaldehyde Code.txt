@@ -1,0 +1,39 @@
+#Ben McAteer 0029592670
+def dCdt(C): 
+    V_room = 1; 
+    Co = 10; 
+    x = 5; 
+    dCdt = -.48 * (10 - x ** 2);
+ 
+    return dCdt; 
+%matplotlib inline
+import matplotlib.pyplot as plt
+
+V_room = 1;  
+C0 = 10; 
+t0 = 0; 
+tf = 100;
+del_t = .01; 
+x = 5;
+dCdt = -.48 * (10 - x ** 2);
+num_steps = int((tf - t0)/del_t); 
+
+
+C_mesh = [0]*(num_steps + 1);
+time_mesh = [0]*(num_steps + 1); 
+
+C_mesh[0] = C0;
+time_mesh[0] = t0;
+
+for i in range(num_steps):
+
+    time_mesh[i+1] = time_mesh[i] + del_t; 
+    C_mesh[i+1] = C_mesh[i] + dCdt * (C_mesh[i]) * del_t
+    
+
+plt.plot(time_mesh,C_mesh,color='b');
+plt.title('Concentration in Room Over Time');
+plt.xlabel('Time (min)');
+plt.ylabel('Concentration g/m^3');
+
+
